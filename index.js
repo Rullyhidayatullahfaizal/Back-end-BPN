@@ -4,16 +4,18 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import db from "./config/database.js";
 import router from "./routes/index.js";
+import dataBeras from "./models/dataModel.js";
 dotenv.config()
 const app = express();
 try {
     await db.authenticate();
     console.log("database connected");
+    await dataBeras.sync()
 } catch (error) {
     console.error(error)
 }
 
-app.use(cors({credentials:true, origin:"http://localhost:3000"}))
+app.use(cors({credentials:true, origin:"http://localhost:5173"}))
 app.use(cookieParser())
 app.use(express.json());
 app.use(router);
