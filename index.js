@@ -4,13 +4,14 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import db from "./config/database.js";
 import router from "./routes/index.js";
-import dataBeras from "./models/dataModel.js";
+import {prediksiLstm,prediksiRF,prediksiTestingLstm, prediksiTestingRF} from "./models/dataModel.js";
 dotenv.config()
 const app = express();
 try {
     await db.authenticate();
     console.log("database connected");
-    await dataBeras.sync()
+    await prediksiRF.sync()
+    await prediksiTestingRF.sync()
 } catch (error) {
     console.error(error)
 }

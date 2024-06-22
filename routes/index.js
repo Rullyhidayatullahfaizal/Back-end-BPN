@@ -2,7 +2,7 @@ import express from "express";
 import { getUsers, login, register,Logout } from "../controllers/users.js";
 import { verifyToken } from "../middleware/verifyToken.js";
 import { refreshToken } from "../controllers/refreshToken.js";
-import { getDatas } from "../controllers/dataProv.js";
+import { getDatasPrediksi, getDatasPrediksiRF, getDatasPrediksiTesting, getDatasPrediksiTestingRF } from "../controllers/dataProv.js";
 const router = express.Router();
 
 
@@ -14,8 +14,14 @@ router.get('/token', refreshToken);
 router.delete('/logout', Logout);
 
 
-//data Beras
-router.get('/datas',getDatas)
+//data Beras lstm
+router.get('/prediksi-lstm',getDatasPrediksi)
+router.get('/testing-lstm',getDatasPrediksiTesting)
+
+//data beras random forest
+router.get('/prediksi-rf',getDatasPrediksiRF)
+router.get('/testing-rf',getDatasPrediksiTestingRF)
+
 
 
 export default router;
